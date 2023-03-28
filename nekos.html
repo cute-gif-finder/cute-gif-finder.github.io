@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Neko Picture Finder | Cute GIF Finder</title>
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1"
+    />
+
+    <meta
+      name="description"
+      content="A neko picture finder that finds cute neko pictures for you. May be suggestive."
+    />
+
+    <meta name="robots" content="noarchive" />
+
+    <!-- Facebook start -->
+    <meta
+      property="og:url"
+      content="https://cute-gif-finder.github.io/nekos/"
+    />
+    <meta property="og:title" content="Neko Picture Finder" />
+    <meta
+      property="og:description"
+      content="A neko picture finder that finds cute neko pictures for you. May be suggestive."
+    />
+    <meta property="og:image" content="" />
+    <!-- Facebook end -->
+
+    <!-- Twitter start -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="thecutefinder.github.io" />
+    <meta
+      property="twitter:url"
+      content="https://cute-gif-finder.github.io/nekos/"
+    />
+    <meta name="twitter:title" content="Neko Picture Finder" />
+    <meta
+      name="twitter:description"
+      content="A neko picture finder that finds cute neko pictures for you. May be suggestive."
+    />
+    <meta name="twitter:image" content="" />
+    <!-- Twitter end -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/thecutefinder/thecutefinder/rubik.css"
+    />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"
+      integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      function loadPictures() {
+        $("#neko").css("display", "none");
+
+        $("#nekoLoading").css("display", "block");
+
+        fetch("https://api.waifu.pics/sfw/neko").then(function (response) {
+          response.json().then(function (data) {
+            const kissURL = data.url;
+
+            $("#neko").attr("src", kissURL);
+
+            $("#neko")[0].onload = function () {
+              $("#nekoLoading").css("display", "none");
+              $("#neko").css("display", "unset");
+            };
+          });
+        });
+      }
+    </script>
+
+    <style>
+      body {
+        text-align: center;
+        background: #000;
+        color: #fff;
+      }
+
+      body,
+      button {
+        font-family: "rubikregular", Arial, Helvetica, sans-serif;
+      }
+
+      button {
+        background: #000;
+        color: #fff;
+        cursor: pointer;
+        border: 1px solid #fff;
+        padding-left: 2%;
+        padding-right: 2%;
+        padding-top: 0.5%;
+        padding-bottom: 0.5%;
+        border-radius: 2px;
+      }
+
+      .blurred {
+        -webkit-filter: blur(44px);
+        filter: blur(44px);
+        cursor: pointer;
+      }
+
+      .flexCenter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <h2>Neko</h2>
+      <h3>(may be suggestive, click to view)</h3>
+      <p id="nekoLoading">Loading...</p>
+      <img
+        id="neko"
+        onclick="$('#neko').removeClass('blurred')"
+        class="blurred"
+      />
+    </div>
+
+    <hr />
+
+    <div class="flexCenter">
+      <button onclick="loadPictures()" class="flexCenter">
+        <span aria-hidden="true"
+          ><img
+            src="https://media.discordapp.net/stickers/1087937486967292045.webp?size=48"
+            width="48"
+            height="48" /></span
+        >&nbsp;Load new picture
+      </button>
+    </div>
+
+    <hr />
+
+    <p>
+      Created by smileoflove from the
+      <a rel="nofollow" href="https://discord.gg/KpZ9DTyUT8">Freedom Server</a>,
+      a Discord server that allows anything within the ToS that isn't annoying,
+      offensive, or rude, including these GIFs, even if mildly suggestive!
+    </p>
+
+    <p>Hosted by Colleiflower (through GitHub pages).</p>
+
+    <script>
+      loadPictures();
+    </script>
+  </body>
+</html>
